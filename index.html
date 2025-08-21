@@ -62,12 +62,29 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            justify-content: flex-start; /* center에서 flex-start로 변경하여 스크롤 문제 해결 */
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        
+        /* Custom scrollbar for tab navigation */
+        .tab-nav::-webkit-scrollbar {
+            height: 6px; /* 스크롤바 높이 */
+        }
+        .tab-nav::-webkit-scrollbar-track {
+            background: transparent; /* 트랙 배경 */
+        }
+        .tab-nav::-webkit-scrollbar-thumb {
+            background-color: #34495E; /* 스크롤바 색상 */
+            border-radius: 3px;
+        }
+        .tab-nav::-webkit-scrollbar-thumb:hover {
+            background-color: #4E6D8C; /* 스크롤바 호버 색상 */
         }
 
         .tab-nav li {
             border-right: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0; /* 탭 버튼이 줄어들지 않도록 설정 */
         }
 
         .tab-nav li:last-child {
@@ -181,6 +198,21 @@
         table tr:hover {
             background: #e8f4f8;
         }
+        
+        /* 특정 테이블 셀 내용이 한 줄로 표시되도록 수정 */
+        #overview table td,
+        #units table td,
+        #structure table td,
+        #graduation table td:nth-child(2),
+        #graduation table td:nth-child(3) {
+            white-space: nowrap;
+        }
+
+        #grading table td:nth-child(2),
+        #grading table td:nth-child(3) {
+             white-space: nowrap;
+        }
+
 
         /* 최소 성취수준 보장 탭 특별 스타일 */
         .case-menu {
@@ -421,19 +453,8 @@
                 font-size: 1.5rem;
             }
 
-            .tab-nav {
-                overflow-x: auto;
-                white-space: nowrap;
-                justify-content: flex-start;
-            }
-
-            .tab-nav li {
-                flex-shrink: 0;
-            }
-
             .tab-nav button {
                 padding: 1rem;
-                white-space: nowrap;
                 min-width: 120px;
             }
 
@@ -745,7 +766,7 @@
                                 <td>자율 이수 확대</td>
                                 <td><span class="highlight-removed">86단위 (42.2%)</span></td>
                                 <td><span class="highlight-new">90학점 (46.9%)</span></td>
-                                <td>학생 선택권 대폭 확대</td>
+                                <td>학생 선택권 확대</td>
                             </tr>
                             <tr>
                                 <td>창체 활동</td>
