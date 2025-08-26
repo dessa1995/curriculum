@@ -13,15 +13,23 @@
         }
 
         :root {
-            --animation-duration: 0.6s;
+            --primary-color: #4A90E2;
+            --secondary-color: #50E3C2;
+            --dark-blue: #001f3f;
+            --light-gray: #f7f9fc;
+            --text-color: #333;
+            --border-color: #e0e6ed;
+            --animation-duration: 0.5s;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background-color: #F8F9FA;
-            color: #343A40;
-            line-height: 1.7;
-            font-size: 18px;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 17px;
         }
 
         .container {
@@ -29,192 +37,201 @@
             margin: 0 auto;
             background: white;
             min-height: 100vh;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
         .header {
-            background: linear-gradient(135deg, #2C3E50, #34495E);
-            color: white;
-            padding: 2rem;
+            background: white;
+            color: var(--dark-blue);
+            padding: 2.5rem 2rem;
             text-align: center;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 2.8rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            letter-spacing: -1px;
         }
 
         .header p {
             font-size: 1.3rem;
-            opacity: 0.9;
+            color: #555;
         }
 
         .main-content {
             min-height: calc(100vh - 200px);
         }
 
-        /* PC 레이아웃 */
         .sidebar {
             width: 100%;
-            background: #2C3E50;
-            padding: 0;
+            background: #fff;
+            padding: 0 1rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: var(--shadow-sm);
         }
 
         .tab-nav {
             list-style: none;
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
             display: flex;
             justify-content: flex-start;
             flex-wrap: nowrap;
             overflow-x: auto;
+            max-width: 100%;
         }
         
         .tab-nav::-webkit-scrollbar {
-            height: 6px;
+            height: 4px;
         }
         .tab-nav::-webkit-scrollbar-track {
             background: transparent;
         }
         .tab-nav::-webkit-scrollbar-thumb {
-            background-color: #34495E;
-            border-radius: 3px;
-        }
-        .tab-nav::-webkit-scrollbar-thumb:hover {
-            background-color: #4E6D8C;
+            background-color: #ccc;
+            border-radius: 2px;
         }
 
         .tab-nav li {
-            border-right: 1px solid rgba(255,255,255,0.1);
             flex-shrink: 0;
         }
 
-        .tab-nav li:last-child {
-            border-right: none;
-        }
-
         .tab-nav button {
-            padding: 1.2rem 1.5rem;
+            padding: 1rem 1.5rem;
             background: transparent;
-            color: white;
+            color: #555;
             border: none;
+            border-bottom: 3px solid transparent;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-family: inherit;
             transition: all 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
             white-space: nowrap;
+            margin-bottom: -1px;
         }
 
         .tab-nav button:hover {
-            background: #34495E;
+            color: var(--primary-color);
         }
 
         .tab-nav button.active {
-            background: #1A242F;
-            font-weight: bold;
-            border-bottom: 4px solid #3498DB;
+            color: var(--primary-color);
+            font-weight: 700;
+            border-bottom: 3px solid var(--primary-color);
         }
 
         .content-area {
             width: 100%;
-            padding: 2rem;
-            overflow: hidden; /* Animation overflow control */
+            padding: 3rem 2rem;
+            overflow: hidden;
         }
 
         .tab-content {
             display: none;
-            opacity: 0;
         }
 
         .tab-content.active {
             display: block;
-            opacity: 1;
-            animation: fadeInUp var(--animation-duration) ease-out forwards;
+            animation: fadeIn var(--animation-duration) ease-out forwards;
         }
 
-        .tab-content h2, .tab-content h3, .tab-content h4, .tab-content p, .tab-content table, .tab-content .case-menu, .tab-content .prerequisite-item, .tab-content .flowchart, .tab-content > div[style] {
+        .tab-content h2, .tab-content h3, .tab-content h4, .tab-content p, .tab-content table, .tab-content .case-menu, .tab-content .prerequisite-item, .tab-content .flowchart-wrapper, .tab-content > div[style] {
             opacity: 0;
+            transform: translateY(20px);
             animation: fadeInUp var(--animation-duration) ease-out forwards;
         }
 
-        /* Staggered animation for elements */
         .tab-content.active h3 { animation-delay: 0.1s; }
         .tab-content.active p { animation-delay: 0.2s; }
         .tab-content.active table { animation-delay: 0.3s; }
         .tab-content.active > div[style] { animation-delay: 0.3s; }
         .tab-content.active .case-menu { animation-delay: 0.2s; }
+        
+        .tab-content.active .prerequisite-item, .tab-content.active .case-content > table, .tab-content.active .flowchart-wrapper > * {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp var(--animation-duration) ease-out forwards;
+        }
+        
         .tab-content.active .prerequisite-item:nth-child(1) { animation-delay: 0.3s; }
         .tab-content.active .prerequisite-item:nth-child(2) { animation-delay: 0.4s; }
         .tab-content.active .prerequisite-item:nth-child(3) { animation-delay: 0.5s; }
-        .tab-content.active .prerequisite-item:nth-child(4) { animation-delay: 0.6s; }
-        .tab-content.active .prerequisite-item:nth-child(5) { animation-delay: 0.7s; }
 
 
         .tab-content h2 {
-            color: #2C3E50;
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            font-weight: bold;
-            border-bottom: 3px solid #3498DB;
-            padding-bottom: 0.5rem;
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 1rem;
         }
 
         .tab-content h3 {
-            color: #2C3E50;
+            color: var(--dark-blue);
             font-size: 1.8rem;
-            margin: 2rem 0 1rem 0;
-            font-weight: bold;
+            margin: 3rem 0 1.5rem 0;
+            font-weight: 700;
         }
 
         .tab-content h4 {
-            color: #34495E;
-            font-size: 1.5rem;
-            margin: 1.5rem 0 0.8rem 0;
-            font-weight: bold;
+            color: #111;
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 700;
         }
 
         .tab-content ul {
-            margin: 1rem 0 1.5rem 2rem;
+            margin: 1rem 0 1.5rem 1.5rem;
         }
 
         .tab-content li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            table-layout: auto; /* 테이블 레이아웃 자동 조정 */
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            overflow: hidden;
+            table-layout: auto;
         }
 
         table th {
-            background: #2C3E50;
+            background: var(--dark-blue);
             color: white;
-            padding: 1.2rem;
-            text-align: left;
-            font-weight: bold;
-            font-size: 1.1rem;
+            padding: 1rem 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
 
         table td {
-            padding: 1.2rem;
-            border-bottom: 1px solid #eee;
-            vertical-align: top;
-            font-size: 1.05rem;
-            word-break: keep-all; /* 단어 단위로 줄바꿈 */
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+            font-size: 0.95rem;
+            word-break: keep-all;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
         }
 
         table tr:nth-child(even) {
-            background: #f8f9fa;
+            background: #fcfdff;
         }
 
         table tr:hover {
-            background: #e8f4f8;
+            background: #f1f5f9;
             transition: background-color 0.3s ease;
         }
         
@@ -226,35 +243,40 @@
         }
 
         .case-button {
-            background: #3498DB;
-            color: white;
-            border: none;
-            padding: 1.2rem 1.8rem;
+            background: #fff;
+            color: #444;
+            border: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-family: inherit;
             transition: all 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
         }
 
         .case-button:hover {
-            background: #2980B9;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-md);
         }
 
         .case-button.active {
-            background: #1A242F;
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
 
         .case-content {
             display: none;
             margin-top: 2rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #3498DB;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
         }
 
         .case-content.active {
@@ -279,91 +301,107 @@
         }
 
         /* 변화 강조 스타일 */
-        .highlight-change {
-            background: linear-gradient(120deg, #fff3cd 0%, #ffeaa7 100%);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #856404;
-            border: 1px solid #ffeaa7;
+        .highlight-change, .highlight-new, .highlight-removed, .highlight-grade-5, .highlight-grade-9, .highlight-grade-3, .highlight-pf {
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            white-space: nowrap;
         }
-
-        .highlight-new {
-            background: linear-gradient(120deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-
-        .highlight-removed {
-            background: linear-gradient(120deg, #f8d7da 0%, #f5c6cb 100%);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .highlight-grade-5 {
-            background: linear-gradient(120deg, #e8f5e8 0%, #c3e6c3 100%);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #155724;
-            border: 1px solid #c3e6c3;
-        }
-        
-        .highlight-grade-9 {
-            background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #0d47a1;
-            border: 1px solid #bbdefb;
-        }
-
-        .highlight-grade-3 {
-            background: linear-gradient(120deg, #fff3e0 0%, #ffe0b3 100%);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #e65100;
-            border: 1px solid #ffe0b3;
-        }
-
-        .highlight-pf {
-            background: linear-gradient(120deg, #f3e5f5 0%, #e1bee7 100%);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #4a148c;
-            border: 1px solid #e1bee7;
-        }
+        .highlight-change { background-color: #fff3cd; color: #856404; }
+        .highlight-new { background-color: #d1ecf1; color: #0c5460; }
+        .highlight-removed { background-color: #f8d7da; color: #721c24; }
+        .highlight-grade-5 { background-color: #d4edda; color: #155724; }
+        .highlight-grade-9 { background-color: #d6eaff; color: #004085; }
+        .highlight-grade-3 { background-color: #ffeeba; color: #856404; }
+        .highlight-pf { background-color: #e2d9f3; color: #491271; }
 
         /* 도식화 스타일 */
-        .flowchart {
-            background: white;
-            border: 2px solid #3498DB;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .flowchart-wrapper {
+            padding: 1rem 0;
         }
+        .flowchart {
+            background: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: none;
+            text-align: center;
+        }
+        .flowchart .box {
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        .flowchart .level-1 { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .flowchart .level-2-교과 { background-color: #cce5ff; border-color: #b8daff; color: #004085; }
+        .flowchart .level-2-창체 { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .flowchart .level-3 { background-color: #e2e3e5; border-color: #d6d8db; color: #383d41; }
+        .flowchart .level-4 { background-color: #fff3cd; border-color: #ffeeba; color: #856404; }
+        
+        .flowchart .connector {
+            position: relative;
+            height: 15px;
+        }
+        .flowchart .connector::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #ccc;
+        }
+        .flowchart .branch {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .flowchart .branch::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -15px;
+            height: 15px;
+            width: 2px;
+            background-color: #ccc;
+        }
+        .flowchart .branch > div {
+            flex: 1;
+            position: relative;
+        }
+        .flowchart .branch > div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #ccc;
+        }
+        .flowchart .branch > div:first-child::before { left: 50%; }
+        .flowchart .branch > div:last-child::before { right: 50%; }
+
 
         .flow-step {
             display: flex;
             align-items: center;
             margin: 1.5rem 0;
-            padding: 1rem;
-            background: #f8f9fa;
+            padding: 1.5rem;
+            background: #fff;
             border-radius: 8px;
-            border-left: 4px solid #3498DB;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .flow-step-number {
-            background: #3498DB;
+            background: var(--primary-color);
             color: white;
             width: 30px;
             height: 30px;
@@ -372,53 +410,57 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            margin-right: 1rem;
+            margin-right: 1.5rem;
             flex-shrink: 0;
         }
 
         .flow-arrow {
             text-align: center;
-            color: #3498DB;
+            color: var(--primary-color);
             font-size: 1.5rem;
             margin: 0.5rem 0;
         }
 
         .decision-box {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
+            background: #fffbe6;
+            border: 1px solid #ffeeba;
             border-radius: 8px;
-            padding: 1rem;
+            padding: 1.5rem;
             margin: 1rem 0;
             text-align: center;
-            font-weight: bold;
+            font-weight: 600;
+            color: #856404;
         }
 
         .result-box {
-            background: #d1ecf1;
-            border: 2px solid #17a2b8;
+            background: #e2f0fb;
+            border: 1px solid #b8daff;
             border-radius: 8px;
-            padding: 1rem;
+            padding: 1.5rem;
             margin: 1rem 0;
             text-align: center;
-            font-weight: bold;
+            font-weight: 600;
+            color: #004085;
         }
 
         .diagram-toggle {
-            background: #17a2b8;
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
             font-family: inherit;
             margin: 1rem 0;
             transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .diagram-toggle:hover {
-            background: #138496;
-            transform: translateY(-1px);
+            background: #357ABD;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .diagram-content {
@@ -438,100 +480,60 @@
 
         /* 선이수 과목 스타일 */
         .prerequisite-item {
-            background: #f8f9fa;
-            border-left: 4px solid #3498DB;
+            background: #fff;
+            border: 1px solid var(--border-color);
             padding: 1.5rem;
             margin: 1rem 0;
-            border-radius: 8px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        .prerequisite-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
         }
 
         .prerequisite-required {
-            background: linear-gradient(120deg, #ffebee 0%, #ffcdd2 100%);
+            background: #f8d7da;
             padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #c62828;
-            border: 1px solid #ffcdd2;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #721c24;
         }
 
         .prerequisite-recommended {
-            background: linear-gradient(120deg, #e8f5e8 0%, #c8e6c9 100%);
+            background: #d4edda;
             padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #2e7d32;
-            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #155724;
         }
 
         /* 모바일 레이아웃 */
         @media (max-width: 768px) {
-            .container {
-                max-width: 100%;
-            }
-
-            .header {
-                padding: 1.5rem 1rem;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-
-            .tab-nav button {
-                padding: 1rem;
-                min-width: 120px;
-            }
-
-            .content-area {
-                padding: 1.5rem 1rem;
-            }
-
-            .tab-content h2 {
-                font-size: 1.5rem;
-            }
-
-            .tab-content h3 {
-                font-size: 1.3rem;
-            }
-
-            .case-menu {
-                flex-direction: column;
-            }
-
-            .case-button {
-                width: 100%;
-                text-align: center;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            table th, table td {
-                padding: 0.8rem 0.5rem;
-            }
+            body { font-size: 16px; }
+            .header { padding: 2rem 1rem; }
+            .header h1 { font-size: 2rem; }
+            .header p { font-size: 1.1rem; }
+            .content-area { padding: 2rem 1rem; }
+            .tab-content h2 { font-size: 2rem; }
+            .tab-content h3 { font-size: 1.5rem; }
+            .tab-content h4 { font-size: 1.2rem; }
+            .tab-nav { padding: 0 0.5rem; }
+            .tab-nav button { padding: 1rem; font-size: 1rem; }
+            .case-menu { flex-direction: column; }
+            .case-button { width: 100%; text-align: center; }
+            table { font-size: 0.9rem; }
+            table th, table td { padding: 0.8rem 0.5rem; }
         }
 
         @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.3rem;
-            }
-
-            .header p {
-                font-size: 1rem;
-            }
-
-            .content-area {
-                padding: 1rem 0.8rem;
-            }
-
-            table {
-                font-size: 0.8rem;
-            }
-
-            table th, table td {
-                padding: 0.6rem 0.4rem;
-            }
+            .header h1 { font-size: 1.8rem; }
+            .header p { font-size: 1rem; }
+            .content-area { padding: 1.5rem 1rem; }
+            table { font-size: 0.85rem; }
+            table th, table td { padding: 0.6rem 0.4rem; }
         }
     </style>
 </head>
@@ -606,7 +608,7 @@
                             <tr>
                                 <td>졸업 기준</td>
                                 <td><span class="highlight-removed">출석일수 충족</span></td>
-                                <td><span class="highlight-new">학점 취득 + 성취율 40%</span></td>
+                                <td><span class="highlight-new">192학점 이상 취득</span></td>
                                 <td>실질적 학습 성과 중심</td>
                             </tr>
                         </tbody>
@@ -665,7 +667,7 @@
                     </table>
 
                     <h3>학점제 도입의 의미</h3>
-                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color); margin: 1.5rem 0;">
                         <h4>🎯 주요 목적</h4>
                         <ul>
                             <li><strong>대학 연계성 강화:</strong> 대학과 동일한 학점 체계로 진학 연계성 향상</li>
@@ -712,97 +714,78 @@
 
                 <!-- 과목 구조 개편 탭 -->
                 <div id="structure" class="tab-content">
-                    <h2>과목 구조의 재편: 선택권 강화와 진로 연계</h2>
-                    <p>고교학점제 시행 이후의 편제표에서 가장 눈에 띄는 변화는 과목 구조입니다. 학생의 진로와 적성에 따른 과목 선택이 가능하도록 과목이 더욱 <span class="highlight-change">세분화되고 다양해졌습니다</span>.</p>
+                    <h2>과목 구조 개편: 교육과정의 편제</h2>
+                    <p>2022 개정 교육과정은 크게 <span class="highlight-change">교과</span>와 <span class="highlight-change">창의적 체험활동</span>으로 구성됩니다. 교과는 다시 <span class="highlight-new">보통 교과</span>와 <span class="highlight-new">전문 교과</span>로 나뉘며, 학생의 진로와 적성에 따른 선택권이 대폭 확대되었습니다.</p>
                     
-                    <h3>과목 체계 변화</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>구분</th>
-                                <th>2015 개정 교육과정</th>
-                                <th>2022 개정 교육과정</th>
-                                <th>변화 내용</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>과목 체계</td>
-                                <td><span class="highlight-removed">공통과목, 선택과목 (일반, 진로)</span></td>
-                                <td><span class="highlight-new">공통과목, 선택과목 (일반, 진로, 융합)</span></td>
-                                <td><span class="highlight-new">융합 선택과목 신설</span></td>
-                            </tr>
-                            <tr>
-                                <td>필수 이수</td>
-                                <td><span class="highlight-removed">94단위</span></td>
-                                <td><span class="highlight-new">84학점</span></td>
-                                <td><span class="highlight-change">10학점 감축</span></td>
-                            </tr>
-                            <tr>
-                                <td>자율 이수</td>
-                                <td><span class="highlight-removed">86단위</span></td>
-                                <td><span class="highlight-new">90학점</span></td>
-                                <td><span class="highlight-change">4학점 확대</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <h3>보통 교과 과목 수 변화</h3>
-                    <p>2015 개정 교육과정에서는 보통 교과목이 일반선택 51개, 진로선택 44개로 총 95개였으나, 2022 개정 교육과정에서는 일반선택 36개, 진로선택 64개, 융합선택 38개로 총 138개로 그 수가 늘어났습니다. 이처럼 <span class="highlight-change">과목의 수가 크게 늘어난 만큼, 학생들은 자신의 진로와 적성을 고려하여 교과목에 대한 충분한 이해를 바탕으로 과목을 선택</span>해야 합니다.</p>
-
-                    <h3>선택과목 유형별 특징</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                        <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB;">
-                            <h4>📚 일반선택과목</h4>
-                            <p><strong>목적:</strong> 기초 소양 및 기본 학력 향상</p>
-                            <p><strong>특징:</strong> 모든 학생이 선택 가능한 기본 과목</p>
-                            <p><strong>예시:</strong> 수학Ⅰ, 수학Ⅱ, 화법과 작문 등</p>
-                        </div>
-                        <div style="background: #f0f8e8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #27ae60;">
-                            <h4>🎯 진로선택과목</h4>
-                            <p><strong>목적:</strong> 개별 진로와 적성에 맞는 심화 학습</p>
-                            <p><strong>특징:</strong> 진로 분야별 전문성 강화</p>
-                            <p><strong>예시:</strong> 기하, 실용 국어, 생명과학Ⅱ 등</p>
-                        </div>
-                        <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f39c12;">
-                            <h4>🔗 융합선택과목 <span class="highlight-new">(신설)</span></h4>
-                            <p><strong>목적:</strong> 교과 간 융합적 사고력 배양</p>
-                            <p><strong>특징:</strong> 여러 교과 영역을 통합한 새로운 접근</p>
-                            <p><strong>예시:</strong> 인공지능 수학, 융합과학 등</p>
+                    <div class="flowchart-wrapper">
+                        <div class="flowchart">
+                            <div class="box level-1">2022 개정 교육과정</div>
+                            <div class="connector"></div>
+                            <div class="branch">
+                                <div>
+                                    <div class="box level-2-교과">교과</div>
+                                    <div class="connector"></div>
+                                    <div class="branch">
+                                        <div>
+                                            <div class="box level-3">보통 교과</div>
+                                            <div class="connector"></div>
+                                            <div class="branch">
+                                                <div>
+                                                    <div class="box level-4">공통 과목</div>
+                                                </div>
+                                                <div>
+                                                    <div class="box level-4">선택 과목</div>
+                                                     <div class="connector"></div>
+                                                     <div class="branch">
+                                                         <div><div class="box" style="background:#fff; border-color:#ccc;">일반 선택</div></div>
+                                                         <div><div class="box" style="background:#fff; border-color:#ccc;">진로 선택</div></div>
+                                                         <div><div class="box" style="background:#fff; border-color:#ccc;">융합 선택</div></div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="box level-3">전문 교과</div>
+                                             <div class="connector"></div>
+                                             <div class="branch">
+                                                 <div><div class="box" style="background:#fff; border-color:#ccc;">전문 공통</div></div>
+                                                 <div><div class="box" style="background:#fff; border-color:#ccc;">전공 일반</div></div>
+                                                 <div><div class="box" style="background:#fff; border-color:#ccc;">전공 실무</div></div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="box level-2-창체">창의적 체험활동</div>
+                                    <div class="connector"></div>
+                                    <div class="branch">
+                                        <div><div class="box" style="background:#fff; border-color:#ccc;">자율·자치 활동</div></div>
+                                        <div><div class="box" style="background:#fff; border-color:#ccc;">동아리 활동</div></div>
+                                        <div><div class="box" style="background:#fff; border-color:#ccc;">진로 활동</div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <h3>이수 구조 변화의 의미</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>영역</th>
-                                <th>변화 전</th>
-                                <th>변화 후</th>
-                                <th>교육적 효과</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>필수 이수 감축</td>
-                                <td><span class="highlight-removed">94단위 (46.1%)</span></td>
-                                <td><span class="highlight-new">84학점 (43.8%)</span></td>
-                                <td>기본 소양 유지하면서 부담 경감</td>
-                            </tr>
-                            <tr>
-                                <td>자율 이수 확대</td>
-                                <td><span class="highlight-removed">86단위 (42.2%)</span></td>
-                                <td><span class="highlight-new">90학점 (46.9%)</span></td>
-                                <td>학생 선택권 확대</td>
-                            </tr>
-                            <tr>
-                                <td>창체 활동</td>
-                                <td><span class="highlight-removed">24단위 (11.8%)</span></td>
-                                <td><span class="highlight-new">18학점 (9.4%)</span></td>
-                                <td>교과 학습 시간 확보</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h3>선택과목 유형별 특징</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                        <div class="prerequisite-item">
+                            <h4>📚 일반선택과목</h4>
+                            <p><strong>목적:</strong> 교과별 학문 영역의 기본 이해를 바탕으로 한 과목입니다.</p>
+                            <p><strong>특징:</strong> 모든 학생이 자신의 흥미나 진로에 따라 선택할 수 있는 기본 과목입니다.</p>
+                        </div>
+                        <div class="prerequisite-item">
+                            <h4>🎯 진로선택과목</h4>
+                            <p><strong>목적:</strong> 학생이 자신의 적성과 진로에 따라 심화 학습을 할 수 있는 과목입니다.</p>
+                            <p><strong>특징:</strong> 교과 융합학습, 진로 안내학습, 교과별 심화학습 및 실생활 체험학습 등이 가능합니다.</p>
+                        </div>
+                        <div class="prerequisite-item">
+                            <h4>🔗 융합선택과목</h4>
+                            <p><strong>목적:</strong> 교과 내, 교과 간 주제를 융합하고 실생활에 적용하며 응용력을 향상시키는 과목입니다.</p>
+                            <p><strong>특징:</strong> 학생의 학문적 역량을 심화하고 비판적 사고력을 키우는 데 중점을 둡니다.</p>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -843,14 +826,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>공통과목 확대:</strong> 공통국어1, 2로 기초 소양 강화</li>
-                                <li><strong>융합선택 신설:</strong> 독서 토론과 글쓰기, 매체 의사소통 등 실용적 과목 추가</li>
-                                <li><strong>진로 연계:</strong> 직무 의사소통으로 직업 준비 교육 강화</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="math" class="case-content subject-content">
@@ -872,14 +847,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>기본수학 신설:</strong> 수학 기초가 부족한 학생을 위한 기본수학1, 2 추가</li>
-                                <li><strong>AI 시대 대응:</strong> 인공지능 수학으로 미래 사회 준비</li>
-                                <li><strong>실용성 강화:</strong> 실용 통계, 직무 수학 등 생활 밀착형 과목</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="english" class="case-content subject-content">
@@ -901,14 +868,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>단계별 학습:</strong> 기본영어부터 심화영어까지 수준별 과목 제공</li>
-                                <li><strong>실용성 중심:</strong> 실생활 영어 회화, 직무 영어로 활용도 향상</li>
-                                <li><strong>글로벌 역량:</strong> 세계 문화와 영어로 국제적 소양 배양</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="social" class="case-content subject-content">
@@ -930,14 +889,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>현실 문제 중심:</strong> 기후변화, 사회문제 탐구 등 현대 이슈 반영</li>
-                                <li><strong>생활 밀착형:</strong> 금융과 경제생활로 실용적 경제 교육</li>
-                                <li><strong>글로벌 시각:</strong> 국제 관계의 이해, 세계시민과 지리</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="science" class="case-content subject-content">
@@ -954,19 +905,11 @@
                             <tbody>
                                 <tr>
                                     <td>물리학, 화학, 생명과학, 지구과학</td>
-                                    <td>역학과 운동, 전자기와 양자, 물질과 에너지의 주기성, 화학 반응의 세계, 세포와 물질대사, 생명의 유전, 지구시스템과학, 행성우주과학</td>
+                                    <td>역학과 에너지, 전자기와 양자, 물질과 에너지, 화학 반응의 세계, 세포와 물질대사, 생물의 유전, 지구시스템과학, 행성우주과학</td>
                                     <td>과학의 역사와 문화, 기후변화와 환경생태, 융합과학 탐구</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>탐구 중심:</strong> 과학탐구실험으로 실험·탐구 능력 강화</li>
-                                <li><strong>세분화된 진로선택:</strong> 각 과학 분야별 심화 과목 제공</li>
-                                <li><strong>융합적 사고:</strong> 융합과학 탐구로 통합적 과학 사고력 배양</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="tech" class="case-content subject-content">
@@ -981,20 +924,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>기술·가정</td>
-                                    <td>정보, 인공지능 기초, 데이터 과학, 로봇 공학 세계, 생활과 과학, 생명과 기술, 아동발달과 부모</td>
-                                    <td>창의 공학 설계, 지식 재산 일반, 소프트웨어와 생활, 생애 설계와 자립, 아동 돌봄과 부모</td>
+                                    <td>기술·가정, 정보</td>
+                                    <td>인공지능 기초, 데이터 과학, 로봇과 공학세계, 생활과학 탐구</td>
+                                    <td>창의 공학 설계, 지식 재산 일반, 생애 설계와 자립, 아동발달과 부모, 소프트웨어와 생활</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>AI·디지털 역량:</strong> 인공지능 기초, 데이터 과학 등 미래 기술 교육</li>
-                                <li><strong>창의성 강화:</strong> 창의 공학 설계, 로봇 공학 세계</li>
-                                <li><strong>생활 실용성:</strong> 생애 설계와 자립, 아동 돌봄과 부모</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="foreign" class="case-content subject-content">
@@ -1010,19 +945,11 @@
                             <tbody>
                                 <tr>
                                     <td>독일어Ⅰ, 프랑스어Ⅰ, 스페인어Ⅰ, 중국어Ⅰ, 일본어Ⅰ, 러시아어Ⅰ, 아랍어Ⅰ, 베트남어Ⅰ, 한문Ⅰ</td>
-                                    <td>심화 독일어Ⅰ, 심화 프랑스어Ⅰ, 심화 스페인어Ⅰ, 심화 중국어Ⅰ, 심화 일본어Ⅰ, 심화 러시아어Ⅰ, 심화 아랍어Ⅰ, 심화 베트남어Ⅰ, 한문 고전 읽기</td>
-                                    <td>독일어 회화/문화, 프랑스어 회화/문화, 스페인어 회화/문화, 중국어 회화/문화, 일본어 회화/문화, 러시아어 회화/문화, 아랍어 회화/문화, 베트남어 회화/문화, 언어생활과 한문 문화</td>
+                                    <td>심화 제2외국어Ⅰ(각 언어), 제2외국어 회화Ⅰ(각 언어), 한문 고전 읽기</td>
+                                    <td>제2외국어권 문화(각 언어권), 언어생활과 한자</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>다양한 언어:</strong> 8개 외국어와 한문으로 선택권 확대</li>
-                                <li><strong>문화 이해:</strong> 각 언어별 회화/문화 과목으로 문화적 소양 배양</li>
-                                <li><strong>실용성 강화:</strong> 회화 중심의 의사소통 능력 향상</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="pe" class="case-content subject-content">
@@ -1043,14 +970,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>건강 중심:</strong> 운동과 건강으로 평생 건강 관리 능력 배양</li>
-                                <li><strong>과학적 접근:</strong> 스포츠 과학으로 체육의 학문적 접근</li>
-                                <li><strong>생활 체육:</strong> 스포츠 생활로 일상 속 체육 활동 강화</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="arts" class="case-content subject-content">
@@ -1066,19 +985,11 @@
                             <tbody>
                                 <tr>
                                     <td>음악, 미술, 연극</td>
-                                    <td>음악 연주와 창작, 음악 감상과 비평, 미술 감상과 비평</td>
-                                    <td>음악과 미디어, 미술과 미디어</td>
+                                    <td>음악 연주와 창작, 음악 감상과 비평, 미술 창작, 미술 감상과 비평</td>
+                                    <td>음악과 미디어, 미술과 매체</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>연극 신설:</strong> 일반선택에 연극 과목 추가로 표현 영역 확대</li>
-                                <li><strong>미디어 융합:</strong> 음악과 미디어, 미술과 미디어로 디지털 시대 대응</li>
-                                <li><strong>창작과 감상:</strong> 실기와 이론의 균형잡힌 예술 교육</li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div id="liberal" class="case-content subject-content">
@@ -1099,14 +1010,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498DB; margin: 1.5rem 0;">
-                            <h4>🎯 주요 특징</h4>
-                            <ul>
-                                <li><strong>진로 탐색:</strong> 진로와 직업으로 체계적인 진로 설계</li>
-                                <li><strong>인문학적 소양:</strong> 철학, 심리, 종교 등 다양한 인문학 과목</li>
-                                <li><strong>실용적 교양:</strong> 논술, 인간과 경제활동으로 실생활 연계</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
@@ -1115,62 +1018,142 @@
                     <h2>2025학년도 입학생 성적 처리 방식</h2>
                     <p>2022 개정 교육과정에서는 교과별로 <span class="highlight-change">성취도와 석차 등급 표기 방식이 다르게 적용</span>됩니다. 이는 각 교과의 특성과 평가 목적을 고려한 것입니다.</p>
                     
-                    <h3>상대평가 등급제 비율 비교 (9등급제 vs 5등급제)</h3>
+                    <h3>상대평가 등급제 비율 비교</h3>
                     <table>
                         <thead>
                             <tr>
-                                <th>등급</th>
-                                <th><span class="highlight-grade-9">기존 9등급제 비율</span></th>
-                                <th><span class="highlight-grade-5">현행 5등급제 비율</span></th>
+                                <th>누적 성적 비율</th>
+                                <th>2015 개정 (9등급제)</th>
+                                <th>2022 개정 (5등급제)</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="text-align: center;">
                             <tr>
-                                <td>1등급</td>
-                                <td>누적 4%</td>
-                                <td rowspan="2">누적 10% (1등급)</td>
+                                <td>~ 4%</td>
+                                <td><span class="highlight-grade-9">1등급</span></td>
+                                <td rowspan="2"><span class="highlight-grade-5">1등급</span> (10%)</td>
                             </tr>
                             <tr>
-                                <td>2등급</td>
-                                <td>누적 11%</td>
+                                <td>~ 11%</td>
+                                <td><span class="highlight-grade-9">2등급</span></td>
                             </tr>
                              <tr>
-                                <td>3등급</td>
-                                <td>누적 23%</td>
-                                <td rowspan="2">누적 34% (2등급)</td>
+                                <td>~ 23%</td>
+                                <td><span class="highlight-grade-9">3등급</span></td>
+                                <td rowspan="2"><span class="highlight-grade-5">2등급</span> (24%)</td>
                             </tr>
                              <tr>
-                                <td>4등급</td>
-                                <td>누적 40%</td>
+                                <td>~ 40%</td>
+                                <td><span class="highlight-grade-9">4등급</span></td>
                             </tr>
                             <tr>
+                                <td>~ 60%</td>
+                                <td><span class="highlight-grade-9">5등급</span></td>
+                                <td rowspan="2"><span class="highlight-grade-5">3등급</span> (32%)</td>
+                            </tr>
+                            <tr>
+                                <td>~ 77%</td>
+                                <td><span class="highlight-grade-9">6등급</span></td>
+                            </tr>
+                            <tr>
+                                <td>~ 89%</td>
+                                <td><span class="highlight-grade-9">7등급</span></td>
+                                <td rowspan="2"><span class="highlight-grade-5">4등급</span> (24%)</td>
+                            </tr>
+                            <tr>
+                                <td>~ 96%</td>
+                                <td><span class="highlight-grade-9">8등급</span></td>
+                            </tr>
+                            <tr>
+                                <td>~ 100%</td>
+                                <td><span class="highlight-grade-9">9등급</span></td>
+                                <td><span class="highlight-grade-5">5등급</span> (10%)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>교과별 성적 처리 방식 개요</h3>
+                     <table>
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>과목</th>
+                                <th>원점수</th>
+                                <th>과목평균</th>
+                                <th>성취도</th>
+                                <th>성취도별<br>분포 비율</th>
+                                <th>석차등급</th>
+                                <th>수강자수</th>
+                                <th>비고</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                            <tr>
+                                <td rowspan="6">보통교과</td>
+                                <td>공통 과목</td>
+                                <td>O</td>
+                                <td>O</td>
+                                <td>5단계</td>
+                                <td>O</td>
                                 <td>5등급</td>
-                                <td>누적 60%</td>
-                                <td rowspan="2">누적 66% (3등급)</td>
+                                <td>O</td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <td>6등급</td>
-                                <td>누적 77%</td>
+                                <td>과학탐구실험</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>3단계</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td></td>
+                            </tr>
+                             <tr>
+                                <td>선택 과목</td>
+                                <td>O</td>
+                                <td>O</td>
+                                <td>5단계</td>
+                                <td>O</td>
+                                <td>5등급</td>
+                                <td>O</td>
+                                <td style="text-align: left; font-size: 0.9rem;">•특수목적고등학교의 선택 과목 포함</td>
                             </tr>
                             <tr>
-                                <td>7등급</td>
-                                <td>누적 89%</td>
-                                <td rowspan="2">누적 90% (4등급)</td>
+                                <td style="text-align: left;">사회(역사/도덕 포함)·과학<br>교과(군) 융합 선택</td>
+                                <td>O</td>
+                                <td>O</td>
+                                <td>5단계</td>
+                                <td>O</td>
+                                <td>-</td>
+                                <td>O</td>
+                                <td style="text-align: left; font-size: 0.85rem;">•'여행지리, 역사로 탐구하는 현대 세계, 사회문제 탐구, 금융과 경제생활, 윤리문제 탐구, 기후변화와 지속가능한 세계, 과학의 역사와 문화, 기후변화와 환경생태, 융합과학 탐구'만 해당함</td>
                             </tr>
                             <tr>
-                                <td>8등급</td>
-                                <td>누적 96%</td>
+                                <td>체육·예술 교과(군)</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>3단계</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td style="text-align: left; font-size: 0.9rem;">•특수목적고등학교의 체육·예술 교과(군) 선택 과목 제외</td>
                             </tr>
-                            <tr>
-                                <td>9등급</td>
-                                <td>누적 100%</td>
-                                <td>누적 100% (5등급)</td>
+                             <tr>
+                                <td>교양 교과(군)</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>P</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td style="text-align: left; font-size: 0.9rem;">•'P'는 성취도가 아닌 '이수여부' 란에 입력</td>
                             </tr>
                         </tbody>
                     </table>
 
                     <h3>상대평가 5등급제 등급별 비율 [예시]</h3>
-                     <table>
+                      <table>
                         <thead style="text-align: center;">
                             <tr>
                                 <th>석차 등급</th>
@@ -1183,20 +1166,20 @@
                         </thead>
                         <tbody style="text-align: center;">
                             <tr>
-                                <td><strong>석차 누적 비율</strong></td>
-                                <td>~ 10% 이하</td>
-                                <td>10% 초과 ~ 34% 이하</td>
-                                <td>34% 초과 ~ 66% 이하</td>
-                                <td>66% 초과 ~ 90% 이하</td>
-                                <td>90% 초과 ~ 100% 이하</td>
+                                <td><strong>등급별 비율</strong></td>
+                                <td>10%</td>
+                                <td>24%</td>
+                                <td>32%</td>
+                                <td>24%</td>
+                                <td>10%</td>
                             </tr>
                             <tr>
-                                <td><strong>누적 비율</strong></td>
-                                <td>10%</td>
-                                <td>34%</td>
-                                <td>66%</td>
-                                <td>90%</td>
-                                <td>100%</td>
+                                <td><strong>석차 누적 비율</strong></td>
+                                <td>~ 10%</td>
+                                <td>~ 34%</td>
+                                <td>~ 66%</td>
+                                <td>~ 90%</td>
+                                <td>~ 100%</td>
                             </tr>
                             <tr>
                                 <td><strong>수강자 178명 - 누적 인원</strong></td>
@@ -1224,159 +1207,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    
-                    <h3>교과별 성적 처리 방식 개요</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>교과(군)</th>
-                                <th>성취도</th>
-                                <th>석차 등급</th>
-                                <th>특이사항</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>국어, 수학, 영어, 사회(역사/도덕 포함), 기술·가정, 정보, 제2외국어, 한문</td>
-                                <td><span class="highlight-grade-5">5단계 (A, B, C, D, E)</span></td>
-                                <td><span class="highlight-grade-5">5등급</span></td>
-                                <td>사회 교과의 융합 선택과목은 석차 등급 X</td>
-                            </tr>
-                            <tr>
-                                <td>과학 (통합과학1, 통합과학2, 일반선택, 진로선택)</td>
-                                <td><span class="highlight-grade-5">5단계 (A, B, C, D, E)</span></td>
-                                <td><span class="highlight-grade-5">5등급</span></td>
-                                <td>공통, 일반, 진로 선택과목 해당</td>
-                            </tr>
-                            <tr>
-                                <td>과학 (융합선택)</td>
-                                <td><span class="highlight-grade-5">5단계 (A, B, C, D, E)</span></td>
-                                <td>X</td>
-                                <td>융합 선택과목은 등급 미산출</td>
-                            </tr>
-                            <tr>
-                                <td>과학 (과학탐구실험1, 과학탐구실험2)</td>
-                                <td><span class="highlight-grade-3">3단계 (A, B, C)</span></td>
-                                <td>X</td>
-                                <td>공통과목 중 실험 과목</td>
-                            </tr>
-                            <tr>
-                                <td>체육, 예술</td>
-                                <td><span class="highlight-grade-3">3단계 (A, B, C)</span></td>
-                                <td>X</td>
-                                <td>모든 과목</td>
-                            </tr>
-                            <tr>
-                                <td>교양</td>
-                                <td><span class="highlight-pf">P/F (Pass/Fail)</span></td>
-                                <td>X</td>
-                                <td>모든 과목</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>성적 처리 방식별 상세 설명</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                        <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #28a745;">
-                            <h4>📊 5단계 성취도 + 5등급</h4>
-                            <p><strong>적용 교과:</strong> 국어, 수학, 영어, 사회(공통/일반/진로), 기술·가정, 정보, 제2외국어, 한문, 과학(공통/일반/진로)</p>
-                            <p><strong>특징:</strong> 대학 입시와 연계된 주요 교과로 상대평가 적용</p>
-                            <p><strong>성취도:</strong> A, B, C, D, E</p>
-                        </div>
-                        <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f39c12;">
-                            <h4>📈 5단계 성취도만</h4>
-                            <p><strong>적용 교과:</strong> 과학(융합선택), 사회(융합선택)</p>
-                            <p><strong>특징:</strong> 절대평가로 진로 및 융합 과목 선택 부담 완화</p>
-                            <p><strong>성취도:</strong> A, B, C, D, E</p>
-                        </div>
-                        <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #9c27b0;">
-                            <h4>✅ 3단계 성취도 또는 P/F</h4>
-                            <p><strong>적용 교과:</strong> 체육, 예술, 교양, 과학탐구실험</p>
-                            <p><strong>특징:</strong> 과정 중심 평가 및 부담 없는 학습 환경 조성</p>
-                            <p><strong>성취도:</strong> A, B, C 또는 P/F</p>
-                        </div>
-                    </div>
-
-                    <h3>교과별 세부 성적 처리 방식</h3>
-                    
-                    <h4>🔬 과학 교과의 특별한 처리 방식</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>과목 유형</th>
-                                <th>해당 과목</th>
-                                <th>성취도</th>
-                                <th>석차 등급</th>
-                                <th>처리 이유</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>공통과목 (이론)</td>
-                                <td>통합과학1, 통합과학2</td>
-                                <td><span class="highlight-grade-5">5단계</span></td>
-                                <td><span class="highlight-grade-5">5등급</span></td>
-                                <td>기초 과학 소양 평가</td>
-                            </tr>
-                            <tr>
-                                <td>일반선택, 진로선택</td>
-                                <td>물리학, 화학, 역학과 운동, 세포와 물질대사 등</td>
-                                <td><span class="highlight-grade-5">5단계</span></td>
-                                <td><span class="highlight-grade-5">5등급</span></td>
-                                <td>주요 선택과목의 변별력 확보</td>
-                            </tr>
-                            <tr>
-                                <td>융합선택</td>
-                                <td>과학의 역사와 문화, 기후변화와 환경생태 등</td>
-                                <td><span class="highlight-grade-5">5단계</span></td>
-                                <td>X</td>
-                                <td>융합적 탐구 활동 장려</td>
-                            </tr>
-                             <tr>
-                                <td>공통과목 (실험)</td>
-                                <td>과학탐구실험1, 과학탐구실험2</td>
-                                <td><span class="highlight-grade-3">3단계</span></td>
-                                <td>X</td>
-                                <td>탐구 과정 중심 평가</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>🌍 사회 교과의 특별한 처리 방식</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>과목 유형</th>
-                                <th>성취도</th>
-                                <th>석차 등급</th>
-                                <th>비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>공통과목, 일반선택과목, 진로선택과목</td>
-                                <td><span class="highlight-grade-5">5단계</span></td>
-                                <td><span class="highlight-grade-5">5등급</span></td>
-                                <td>기본 사회과학 소양 및 진로 심화 학습 평가</td>
-                            </tr>
-                            <tr>
-                                <td>융합선택과목</td>
-                                <td><span class="highlight-grade-5">5단계</span></td>
-                                <td>X</td>
-                                <td>융합적 탐구 활동 장려 및 부담 완화</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div style="background: #fff3cd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ffc107; margin: 2rem 0;">
-                        <h4>💡 성적 처리 방식의 교육적 의미</h4>
-                        <ul>
-                            <li><strong>기초 교과 강화:</strong> 국어, 수학, 영어, 사회, 과학 등 기본 소양 및 주요 선택 교과는 5단계+5등급으로 엄격 평가</li>
-                            <li><strong>진로 선택 부담 완화:</strong> 융합선택과목은 석차 등급 없이 성취도만 표기하여 학생 선택권 보장</li>
-                            <li><strong>실기·체험 중심 평가:</strong> 체육, 예술, 과학탐구실험은 3단계 절대평가로 과정 중심 평가</li>
-                            <li><strong>교양 교육 활성화:</strong> 교양 교과는 P/F로 부담 없는 학습 환경 조성</li>
-                        </ul>
-                    </div>
                 </div>
 
                 <!-- 과목 계열성 탭 -->
@@ -1591,75 +1421,37 @@
                             <tr>
                                 <td>졸업 기준</td>
                                 <td><span class="highlight-removed">수업일수(2/3 이상 출석) 충족</span></td>
-                                <td><span class="highlight-new">총 192학점 이상 취득 및 출석률(2/3)과 성취율(40%) 충족</span></td>
+                                <td><span class="highlight-new">총 192학점 이상 취득</span></td>
                             </tr>
                             <tr>
                                 <td>평가 기준</td>
                                 <td><span class="highlight-removed">출석 중심</span></td>
-                                <td><span class="highlight-new">성취 중심 (최소 40% 이상)</span></td>
+                                <td><span class="highlight-new">출석률 + 성취 중심</span></td>
                             </tr>
                             <tr>
                                 <td>미이수 시</td>
                                 <td><span class="highlight-removed">별도 규정 없음</span></td>
                                 <td><span class="highlight-new">보충 이수 프로그램 등을 통해 학점 취득 기회 제공</span></td>
                             </tr>
-                            <tr>
-                                <td>재이수 제도</td>
-                                <td><span class="highlight-removed">없음</span></td>
-                                <td><span class="highlight-new">미이수 과목에 대한 재이수 기회 제공</span></td>
-                            </tr>
                         </tbody>
                     </table>
 
                     <h3>새로운 졸업 요건의 핵심</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                        <div style="background: #fff3cd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ffc107;">
-                            <h4>📊 성취율 40% 이상</h4>
+                        <div class="prerequisite-item">
+                            <h4>💯 성취율 40% 이상</h4>
                             <p>각 과목에서 최소 40% 이상의 성취율을 달성해야 해당 과목의 학점을 취득할 수 있습니다.</p>
                         </div>
-                        <div style="background: #d1ecf1; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                        <div class="prerequisite-item">
                             <h4>📅 출석률 2/3 이상</h4>
-                            <p>기존과 동일하게 수업일수의 2/3 이상 출석해야 합니다.</p>
+                            <p>나이스 기준 실제 수업일수의 2/3 이상 출석해야 합니다.</p>
                         </div>
-                        <div style="background: #d4edda; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #28a745;">
+                        <div class="prerequisite-item">
                             <h4>🎓 총 192학점 취득</h4>
                             <p>교과 174학점 + 창의적 체험활동 18학점 = 총 192학점을 모두 취득해야 졸업 가능합니다.</p>
                         </div>
                     </div>
-
-                    <h3>미이수 시 지원 방안</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>지원 방법</th>
-                                <th>대상</th>
-                                <th>내용</th>
-                                <th>기대 효과</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="highlight-new">보충 이수</span></td>
-                                <td>성취율 40% 미만 학생</td>
-                                <td>추가 학습 및 재평가 기회 제공</td>
-                                <td>학습 결손 보완</td>
-                            </tr>
-                            <tr>
-                                <td><span class="highlight-new">재이수</span></td>
-                                <td>최종 미이수 학생</td>
-                                <td>해당 과목을 다시 수강</td>
-                                <td>완전한 학습 성취</td>
-                            </tr>
-                            <tr>
-                                <td><span class="highlight-new">대체 이수</span></td>
-                                <td>특정 과목 미이수 학생</td>
-                                <td>유사한 다른 과목으로 대체</td>
-                                <td>진로 맞춤형 학습</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <p>각 과목별로 일정 수준 이상의 학업 성취(<span class="highlight-change">성취율 40% 이상</span>)를 거두어야 해당 과목의 학점을 취득할 수 있으며, 누적 학점이 <span class="highlight-change">192학점 이상</span>이 되어야 졸업이 가능합니다. 만약 특정 과목에서 학점을 취득하지 못한 경우, <span class="highlight-new">보충 이수나 재이수를 통해 학점을 취득할 수 있는 기회가 제공</span>됩니다. 이는 학생들이 단순히 시간을 채우는 것이 아니라, <span class="highlight-change">실질적인 학습 성과를 바탕으로 졸업</span>할 수 있도록 하는 제도적 장치입니다.</p>
+                    <p><strong>※ 과목별 미이수 학생에 대한 구체적인 지침은 추후 교육부에서 발표할 예정입니다.</strong></p>
                 </div>
 
                 <!-- 최소 성취수준 보장지도 탭 -->
@@ -1670,74 +1462,76 @@
                     <button class="diagram-toggle" onclick="toggleDiagram()">📊 최소 성취수준 보장지도 프로세스 도식 보기</button>
                     
                     <div id="process-diagram" class="diagram-content">
-                        <div class="flowchart">
-                            <h3 style="text-align: center; color: #2C3E50; margin-bottom: 2rem;">최소 성취수준 보장지도 프로세스</h3>
-                            
-                            <div class="flow-step">
-                                <div class="flow-step-number">1</div>
-                                <div>
-                                    <strong>학기 중 평가 실시</strong><br>
-                                    정기고사, 수행평가 등을 통한 학업성취도 확인
+                        <div class="flowchart-wrapper">
+                            <div class="flowchart" style="min-width: 800px;">
+                                <h3 style="text-align: center; color: var(--dark-blue); margin-bottom: 2rem;">최소 성취수준 보장지도 프로세스</h3>
+                                
+                                <div class="flow-step">
+                                    <div class="flow-step-number">1</div>
+                                    <div>
+                                        <strong>학기 중 평가 실시</strong><br>
+                                        정기고사, 수행평가 등을 통한 학업성취도 확인
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div class="flow-arrow">⬇️</div>
-                            
-                            <div class="decision-box">
-                                <strong>성취율 40% 이상 & 출석률 2/3 이상?</strong>
-                            </div>
-                            
-                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 2rem 0;">
-                                <div>
-                                    <div class="result-box" style="background: #d4edda; border-color: #28a745;">
+                                
+                                <div class="flow-arrow">⬇️</div>
+                                
+                                <div class="decision-box">
+                                    <strong>성취율 40% 이상 & 출석률 2/3 이상?</strong>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 2rem 0;">
+                                    <div>
+                                        <div class="result-box" style="background: #d4edda; border-color: #c3e6cb;">
+                                            <strong>✅ 학점 취득</strong><br>
+                                            정상적인 학점 인정
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="result-box" style="background: #fff3cd; border-color: #ffeeba;">
+                                            <strong>⚠️ 보충지도</strong><br>
+                                            성취율 40% 미만
+                                        </div>
+                                        <div class="flow-arrow">⬇️</div>
+                                        <div class="flow-step">
+                                            <div class="flow-step-number">2</div>
+                                            <div>
+                                                <strong>보충지도 실시</strong><br>
+                                                개별 맞춤형 학습 지원
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="result-box" style="background: #d1ecf1; border-color: #bee5eb;">
+                                            <strong>📚 추가학습</strong><br>
+                                            출석률 2/3 미만
+                                        </div>
+                                        <div class="flow-arrow">⬇️</div>
+                                        <div class="flow-step">
+                                            <div class="flow-step-number">3</div>
+                                            <div>
+                                                <strong>추가학습 실시</strong><br>
+                                                학습시간 보충 프로그램
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flow-arrow">⬇️</div>
+                                
+                                <div class="decision-box">
+                                    <strong>보충지도/추가학습 후 최소 성취수준 도달?</strong>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                                    <div class="result-box" style="background: #d4edda; border-color: #c3e6cb;">
                                         <strong>✅ 학점 취득</strong><br>
-                                        정상적인 학점 인정
+                                        생활기록부에 보충지도/추가학습 이수 기재
                                     </div>
-                                </div>
-                                <div>
-                                    <div class="result-box" style="background: #fff3cd; border-color: #ffc107;">
-                                        <strong>⚠️ 보충지도</strong><br>
-                                        성취율 40% 미만
+                                    <div class="result-box" style="background: #f8d7da; border-color: #f5c6cb;">
+                                        <strong>❌ 미이수</strong><br>
+                                        <span style="font-weight: 500;">(추후 교육부 지침에 따름)</span>
                                     </div>
-                                    <div class="flow-arrow">⬇️</div>
-                                    <div class="flow-step">
-                                        <div class="flow-step-number">2</div>
-                                        <div>
-                                            <strong>보충지도 실시</strong><br>
-                                            개별 맞춤형 학습 지원
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="result-box" style="background: #d1ecf1; border-color: #17a2b8;">
-                                        <strong>📚 추가학습</strong><br>
-                                        출석률 2/3 미만
-                                    </div>
-                                    <div class="flow-arrow">⬇️</div>
-                                    <div class="flow-step">
-                                        <div class="flow-step-number">3</div>
-                                        <div>
-                                            <strong>추가학습 실시</strong><br>
-                                            학습시간 보충 프로그램
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="flow-arrow">⬇️</div>
-                            
-                            <div class="decision-box">
-                                <strong>보충지도/추가학습 후 최소 성취수준 도달?</strong>
-                            </div>
-                            
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
-                                <div class="result-box" style="background: #d4edda; border-color: #28a745;">
-                                    <strong>✅ 학점 취득</strong><br>
-                                    생활기록부에 보충지도/추가학습 이수 기재
-                                </div>
-                                <div class="result-box" style="background: #f8d7da; border-color: #dc3545;">
-                                    <strong>❌ 미이수</strong><br>
-                                    재이수 또는 대체과목 이수 필요
                                 </div>
                             </div>
                         </div>
@@ -1746,7 +1540,7 @@
                     <h3>구체적 사례별 지원 방안</h3>
                     <div class="case-menu">
                         <button class="case-button" data-case="case1">[사례 1] 학업성취율 40% 미만 → 보충지도 이수</button>
-                        <button class="case-button" data-case="case2">[사례 2] 성취율 40% 이상 & 출석률 2/3 미만 → 추가학습 이수</button>
+                        <button class="case-button" data-case="case2">[사례 2] 출석률 2/3 미만 → 추가학습 이수</button>
                         <button class="case-button" data-case="case3">[사례 3] 학업성취율과 출석률 둘 다 미달</button>
                         <button class="case-button" data-case="case4">[사례 4] 최종 미이수</button>
                     </div>
@@ -1754,31 +1548,25 @@
                     <div id="case1" class="case-content">
                         <h4>사례 1: 학업성취율 40% 미만 → 보충지도 이수</h4>
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>상황</td>
+                                    <td><strong>상황</strong></td>
                                     <td><span class="highlight-change">정기고사 성적이 40% 미만</span>이지만 출석률은 2/3 이상</td>
                                 </tr>
                                 <tr>
-                                    <td>조치</td>
+                                    <td><strong>조치</strong></td>
                                     <td><span class="highlight-new">보충지도 프로그램 이수 후 재평가</span></td>
                                 </tr>
                                 <tr>
-                                    <td>이수 처리</td>
+                                    <td><strong>이수 처리</strong></td>
                                     <td><span class="highlight-new">해당 과목 이수 처리</span></td>
                                 </tr>
                                 <tr>
-                                    <td>성취도 기재</td>
+                                    <td><strong>성취도 기재</strong></td>
                                     <td><span class="highlight-new">성취도 'E'로 기재</span></td>
                                 </tr>
                                 <tr>
-                                    <td>보충학습 여부</td>
+                                    <td><strong>보충학습 여부</strong></td>
                                     <td><span class="highlight-new">미기재</span></td>
                                 </tr>
                             </tbody>
@@ -1786,33 +1574,27 @@
                     </div>
 
                     <div id="case2" class="case-content">
-                        <h4>사례 2: 성취율 40% 이상 & 출석률 2/3 미만 → 추가학습 이수</h4>
+                        <h4>사례 2: 출석률 2/3 미만 → 추가학습 이수</h4>
                         <table>
-                            <thead>
+                           <tbody>
                                 <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>상황</td>
+                                    <td><strong>상황</strong></td>
                                     <td>학업성취율은 40% 이상이지만 <span class="highlight-change">출석률이 2/3 미만</span></td>
                                 </tr>
                                 <tr>
-                                    <td>조치</td>
+                                    <td><strong>조치</strong></td>
                                     <td><span class="highlight-new">추가학습 프로그램을 통한 학습시간 보충</span></td>
                                 </tr>
                                 <tr>
-                                    <td>이수 처리</td>
+                                    <td><strong>이수 처리</strong></td>
                                     <td><span class="highlight-new">해당 과목 이수 처리</span></td>
                                 </tr>
                                 <tr>
-                                    <td>성취도 기재</td>
+                                    <td><strong>성취도 기재</strong></td>
                                     <td><span class="highlight-new">해당 학생이 얻은 성취도로 기재</span> (A, B, C, D 등)</td>
                                 </tr>
                                 <tr>
-                                    <td>비고란 기재</td>
+                                    <td><strong>비고란 기재</strong></td>
                                     <td><span class="highlight-new">"출석률 미달로 인한 추가학습 실시"</span></td>
                                 </tr>
                             </tbody>
@@ -1822,31 +1604,25 @@
                     <div id="case3" class="case-content">
                         <h4>사례 3: 학업성취율과 출석률 둘 다 미달 → 보충지도 이수</h4>
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>상황</td>
+                                    <td><strong>상황</strong></td>
                                     <td><span class="highlight-change">학업성취율 40% 미만 & 출석률 2/3 미만</span></td>
                                 </tr>
                                 <tr>
-                                    <td>조치</td>
+                                    <td><strong>조치</strong></td>
                                     <td><span class="highlight-new">보충지도 실시</span> (성취율 미달이 우선 조치 대상)</td>
                                 </tr>
                                 <tr>
-                                    <td>이수 처리</td>
+                                    <td><strong>이수 처리</strong></td>
                                     <td><span class="highlight-new">보충지도 이수 시 해당 과목 이수 처리</span></td>
                                 </tr>
                                 <tr>
-                                    <td>성취도 기재</td>
+                                    <td><strong>성취도 기재</strong></td>
                                     <td><span class="highlight-new">성취도 'E'로 기재</span></td>
                                 </tr>
                                 <tr>
-                                    <td>보충학습 여부</td>
+                                    <td><strong>보충학습 여부</strong></td>
                                     <td><span class="highlight-new">미기재</span></td>
                                 </tr>
                             </tbody>
@@ -1856,27 +1632,21 @@
                     <div id="case4" class="case-content">
                         <h4>사례 4: 최종 미이수</h4>
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>상황</td>
+                                    <td><strong>상황</strong></td>
                                     <td><span class="highlight-change">보충지도나 추가학습 후에도 최소 성취수준 미도달</span></td>
                                 </tr>
                                 <tr>
-                                    <td>조치</td>
-                                    <td><span class="highlight-new">재이수 또는 대체과목 이수 안내</span></td>
+                                    <td><strong>조치</strong></td>
+                                    <td><span class="highlight-new">(추후 교육부 지침에 따름)</span></td>
                                 </tr>
                                 <tr>
-                                    <td>생활기록부 기재</td>
+                                    <td><strong>생활기록부 기재</strong></td>
                                     <td><span class="highlight-removed">"미이수" 표기</span> 및 사유 기재</td>
                                 </tr>
                                 <tr>
-                                    <td>학점 인정</td>
+                                    <td><strong>학점 인정</strong></td>
                                     <td>학점 미인정, 졸업 요건 충족을 위한 추가 이수 필요</td>
                                 </tr>
                             </tbody>
@@ -1896,89 +1666,47 @@
             button.addEventListener('click', () => {
                 const targetTab = button.getAttribute('data-tab');
                 
-                // 모든 탭 버튼에서 active 클래스 제거
                 tabButtons.forEach(btn => btn.classList.remove('active'));
-                // 클릭된 버튼에 active 클래스 추가
                 button.classList.add('active');
                 
-                // 모든 탭 콘텐츠 숨기기
                 tabContents.forEach(content => {
                     content.classList.remove('active');
                 });
                 
-                // 선택된 탭 콘텐츠 보이기
                 document.getElementById(targetTab).classList.add('active');
             });
         });
 
-        // 최소 성취수준 보장 탭의 사례 버튼 기능
-        const caseButtons = document.querySelectorAll('.case-button:not(.subject-button):not(.prereq-button)');
-        const caseContents = document.querySelectorAll('.case-content:not(.subject-content):not(.prereq-content)');
+        // 내부 탭 기능 (사례, 교과, 선이수)
+        function setupInnerTabs(buttonClass, contentClass) {
+            const buttons = document.querySelectorAll(buttonClass);
+            const contents = document.querySelectorAll(contentClass);
 
-        caseButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetCase = button.getAttribute('data-case');
-                
-                // 모든 사례 버튼에서 active 클래스 제거
-                caseButtons.forEach(btn => btn.classList.remove('active'));
-                // 클릭된 버튼에 active 클래스 추가
-                button.classList.add('active');
-                
-                // 모든 사례 콘텐츠 숨기기
-                caseContents.forEach(content => {
-                    content.classList.remove('active');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.case || button.dataset.subject || button.dataset.prereq;
+                    
+                    const wasActive = button.classList.contains('active');
+
+                    buttons.forEach(btn => {
+                       btn.classList.remove('active');
+                    });
+                    
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    if(!wasActive){
+                        button.classList.add('active');
+                        document.getElementById(targetId).classList.add('active');
+                    }
                 });
-                
-                // 선택된 사례 콘텐츠 보이기
-                document.getElementById(targetCase).classList.add('active');
             });
-        });
+        }
 
-        // 교과별 변화 탭의 교과 버튼 기능
-        const subjectButtons = document.querySelectorAll('.subject-button');
-        const subjectContents = document.querySelectorAll('.subject-content');
-
-        subjectButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetSubject = button.getAttribute('data-subject');
-                
-                // 모든 교과 버튼에서 active 클래스 제거
-                subjectButtons.forEach(btn => btn.classList.remove('active'));
-                // 클릭된 버튼에 active 클래스 추가
-                button.classList.add('active');
-                
-                // 모든 교과 콘텐츠 숨기기
-                subjectContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // 선택된 교과 콘텐츠 보이기
-                document.getElementById(targetSubject).classList.add('active');
-            });
-        });
-
-        // 선이수 과목 탭의 교과 버튼 기능
-        const prereqButtons = document.querySelectorAll('.prereq-button');
-        const prereqContents = document.querySelectorAll('.prereq-content');
-
-        prereqButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetPrereq = button.getAttribute('data-prereq');
-                
-                // 모든 선이수 버튼에서 active 클래스 제거
-                prereqButtons.forEach(btn => btn.classList.remove('active'));
-                // 클릭된 버튼에 active 클래스 추가
-                button.classList.add('active');
-                
-                // 모든 선이수 콘텐츠 숨기기
-                prereqContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // 선택된 선이수 콘텐츠 보이기
-                document.getElementById(targetPrereq).classList.add('active');
-            });
-        });
+        setupInnerTabs('.case-button:not(.subject-button):not(.prereq-button)', '.case-content:not(.subject-content):not(.prereq-content)');
+        setupInnerTabs('.subject-button', '.subject-content');
+        setupInnerTabs('.prereq-button', '.prereq-content');
 
         // 도식화 토글 기능
         function toggleDiagram() {
