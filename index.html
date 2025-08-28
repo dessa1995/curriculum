@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>고교학점제 교육과정 비교</title>
+    <title>고등학교 교육과정의 변화 양상</title>
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet">
     <style>
         * {
@@ -318,6 +318,7 @@
         /* 도식화 스타일 */
         .flowchart-wrapper {
             padding: 1rem 0;
+            overflow-x: auto;
         }
         .flowchart {
             background: var(--light-gray);
@@ -327,6 +328,8 @@
             margin: 1.5rem 0;
             box-shadow: none;
             text-align: center;
+            display: inline-block;
+            min-width: 100%;
         }
         .flowchart .box {
             padding: 0.5rem 0.8rem;
@@ -551,6 +554,8 @@
                 <li><button class="tab-button" data-tab="structure">과목 구조 개편</button></li>
                 <li><button class="tab-button" data-tab="subjects">교과별 변화</button></li>
                 <li><button class="tab-button" data-tab="grading">성적 처리 방식</button></li>
+                <li><button class="tab-button" data-tab="credits">선택 과목 학점 설계</button></li>
+                 <li><button class="tab-button" data-tab="assignment">학점 배당 기준</button></li>
                 <li><button class="tab-button" data-tab="achievement_hierarchy">과목 계열성</button></li>
                 <li><button class="tab-button" data-tab="graduation">졸업 요건</button></li>
                 <li><button class="tab-button" data-tab="achievement">최소 성취수준 보장지도</button></li>
@@ -1089,7 +1094,7 @@
                         </thead>
                         <tbody style="text-align: center;">
                             <tr>
-                                <td rowspan="6">보통교과</td>
+                                <td rowspan="9">보통교과</td>
                                 <td>공통 과목</td>
                                 <td>O</td>
                                 <td>O</td>
@@ -1149,6 +1154,36 @@
                                 <td>-</td>
                                 <td style="text-align: left; font-size: 0.9rem;">•'P'는 성취도가 아닌 '이수여부' 란에 입력</td>
                             </tr>
+                             <tr>
+                                <td style="text-align: left;">보통교과 및 전문교과 중<br>수강자 수 5명 이하인 과목</td>
+                                <td>O</td>
+                                <td>O</td>
+                                <td>5단계</td>
+                                <td>O</td>
+                                <td>'⦁' 또는 5등급</td>
+                                <td>O</td>
+                                <td></td>
+                            </tr>
+                             <tr>
+                                <td style="text-align: left;">공동교육과정 및<br>온라인학교 개설 과목</td>
+                                <td>O</td>
+                                <td>O</td>
+                                <td>5단계</td>
+                                <td>O</td>
+                                <td>⦁</td>
+                                <td>O</td>
+                                <td></td>
+                            </tr>
+                             <tr>
+                                <td>학교 밖 교육</td>
+                                <td>⦁</td>
+                                <td>⦁</td>
+                                <td>⦁</td>
+                                <td>⦁</td>
+                                <td>⦁</td>
+                                <td>⦁</td>
+                                <td style="text-align: left; font-size: 0.9rem;">•학교 밖 교육을 이수한 경우 '⦁' 표시</td>
+                            </tr>
                         </tbody>
                     </table>
 
@@ -1207,6 +1242,146 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- 선택 과목 학점 설계 탭 -->
+                <div id="credits" class="tab-content">
+                    <h2>선택 과목의 기본 학점 및 증감 편성·운영 범위</h2>
+                    <p>2022 개정 교육과정에서는 과목별 기본 학점을 기준으로 학교가 자율적으로 학점을 증감하여 편성할 수 있습니다. 이는 학생의 필요와 학교의 여건에 따른 유연한 교육과정 운영을 지원하기 위함입니다.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>과목 구분</th>
+                                <th>과목</th>
+                                <th>기본 학점</th>
+                                <th>편성·운영 범위</th>
+                                <th>비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3">공통 과목</td>
+                                <td>공통국어1,2 / 공통수학1,2 / 공통영어1,2 / 통합사회1,2 / 통합과학1,2</td>
+                                <td>4학점</td>
+                                <td>3~4학점</td>
+                                <td style="text-align: left;">1학점 내 감(-) 가능, 증(+) 불가</td>
+                            </tr>
+                            <tr>
+                                <td>한국사1,2</td>
+                                <td>3학점</td>
+                                <td>3학점</td>
+                                <td style="text-align: left;">감(-) 불가, 증(+) 불가</td>
+                            </tr>
+                            <tr>
+                                <td>과학탐구실험1,2</td>
+                                <td>1학점</td>
+                                <td>1학점</td>
+                                <td style="text-align: left;">과학교, 체육고, 예술고, 특성화고 및 산업수요 맞춤형고에서는 과학탐구실험 편성 제외 가능</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">선택 과목</td>
+                                <td>국어, 수학, 영어, 사회, 과학, 기술·가정/정보/제2외국어/한문 교과(군)의 선택 과목</td>
+                                <td>4학점</td>
+                                <td>3~5학점</td>
+                                <td style="text-align: left;">1학점 내 증감(±) 가능</td>
+                            </tr>
+                            <tr>
+                                <td>체육/예술/교양 교과(군)의 선택 과목</td>
+                                <td>3학점</td>
+                                <td>2~4학점</td>
+                                <td style="text-align: left;">1학점 내 증감(±) 가능</td>
+                            </tr>
+                            <tr>
+                                <td>스포츠 문화, 스포츠 과학, 생애 설계와 자립</td>
+                                <td>2학점</td>
+                                <td>1~2학점</td>
+                                <td style="text-align: left;">1학점 내 감(-) 가능</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 학점 배당 기준 탭 -->
+                <div id="assignment" class="tab-content">
+                    <h2>일반고 및 특목고 학점 배당 기준</h2>
+                    <p>다음은 산업수요 맞춤형 고등학교를 제외한 일반고 및 특목고의 교과별 학점 배당 기준입니다. 학교는 학생의 적성과 진로를 고려하여 자율적으로 학점을 편성할 수 있습니다.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>교과(군)</th>
+                                <th>공통 과목</th>
+                                <th>필수 이수 학점</th>
+                                <th>자율 이수 학점</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                            <tr>
+                                <td>국어</td>
+                                <td>공통국어1, 공통국어2</td>
+                                <td>8</td>
+                                <td rowspan="8" style="vertical-align: middle;">학생의 적성과<br>진로를 고려하여 편성</td>
+                            </tr>
+                            <tr>
+                                <td>수학</td>
+                                <td>공통수학1, 공통수학2</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>영어</td>
+                                <td>공통영어1, 공통영어2</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>사회(역사/도덕 포함)</td>
+                                <td>한국사1, 한국사2<br>통합사회1, 통합사회2</td>
+                                <td>6<br>8</td>
+                            </tr>
+                            <tr>
+                                <td>과학</td>
+                                <td>통합과학1, 통합과학2<br>과학탐구실험1, 과학탐구실험2</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>체육</td>
+                                <td></td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>예술</td>
+                                <td></td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>기술·가정/제2외국어/한문/교양</td>
+                                <td></td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>소계</strong></td>
+                                <td><strong>84</strong></td>
+                                <td><strong>90</strong></td>
+                            </tr>
+                             <tr>
+                                <td colspan="2">창의적 체험활동</td>
+                                <td colspan="2">18 (288시간)</td>
+                            </tr>
+                             <tr>
+                                <td colspan="2"><strong>총 이수 학점</strong></td>
+                                <td colspan="2"><strong>192</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul style="font-size: 0.9rem; color: #555; list-style-type: '① '; padding-left: 1.5rem;">
+                        <li>1학점은 50분을 기준으로 하여 16회를 이수하는 수업량입니다.</li>
+                        <li>1시간의 수업은 50분을 원칙으로 하되, 기후 및 계절, 학생의 발달 정도, 학습 내용의 성격, 학교 실정 등을 고려하여 탄력적으로 편성·운영할 수 있습니다.</li>
+                        <li>공통 과목의 기본 학점은 4학점이며, 1학점 범위 내에서 감하여 편성·운영할 수 있습니다. 단, 한국사1, 2의 기본 학점은 3학점이며 감하여 편성·운영할 수 없습니다.</li>
+                        <li>과학탐구실험1, 2의 기본 학점은 1학점이며 증감 없이 편성·운영하는 것을 원칙으로 합니다. 단, 과학고, 체육고, 예술 계열 고등학교의 경우 학교 실정에 따라 탄력적으로 운영할 수 있습니다.</li>
+                        <li>필수 이수 학점 수는 해당 교과(군)의 최소 이수 학점입니다. 특수 목적 고등학교의 경우 예술 교과(군)는 5학점 이상, 기술·가정/정보/제2외국어/한문/교양 교과(군)는 12학점 이상 이수하도록 합니다.</li>
+                        <li>국어, 수학, 영어 교과의 이수 학점 총합은 81학점을 초과하지 않도록 하며, 교과 이수 학점이 174학점을 초과하는 경우에는 초과 이수 학점의 50%를 넘지 않도록 합니다.</li>
+                        <li>창의적 체험활동의 학점 수는 최소 이수 학점이며 ( ) 안의 숫자는 이수 학점을 시간 수로 환산한 것입니다.</li>
+                        <li>총 이수 학점 수는 고등학교 졸업을 위해 3년간 이수해야 할 최소 이수 학점을 의미합니다.</li>
+                    </ul>
+
                 </div>
 
                 <!-- 과목 계열성 탭 -->
